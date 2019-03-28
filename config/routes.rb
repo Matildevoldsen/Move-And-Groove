@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users, path: '', path_names: { sign_in: 'login', sign_out: 'logout'}
+  devise_for :users, path: '', path_names: { sign_in: 'login', 'sign_up': 'register', sign_out: 'logout'}
+
+  get 'activities/index'
+  root to: 'activities#index'
+
+  resources :activities
 
   get 'home/index'
   root to: "home#index"
