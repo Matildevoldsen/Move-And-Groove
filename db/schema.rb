@@ -10,12 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_03_28_120617) do
+ActiveRecord::Schema.define(version: 2019_04_06_131451) do
 
-  # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  create_table "activities", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "activity_name", default: "", null: false
+    t.string "activity_duration", default: "0", null: false
+    t.date "activity_date", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
+    t.string "name", default: "", null: false
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

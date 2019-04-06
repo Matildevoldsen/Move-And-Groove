@@ -1,0 +1,28 @@
+<div class="container">
+  <h1>My Activities</h1>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Date</th>
+      <th>Duration</th>
+      <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+      <% activities = @activities %>
+      <% activities.each_with_index do |activity, idx| %>
+          <td><%= activity.id %></td>
+          <td><%= activity.activity_name %></td>
+          <td><%= activity.activity_date %></td>
+          <td><%= activity.activity_duration %></td>
+          <td><%= link_to "View", activity %> | <%= link_to "Edit", edit_activity_path(activity) %>
+            | <%= link_to "Delete", activity, method: :delete, data: {confirm: "Are you sure?"} %></td>
+          </tr>
+      <% end %>
+      </tbody>
+  </table>
+</div>
