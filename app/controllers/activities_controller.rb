@@ -8,7 +8,6 @@ class ActivitiesController < ApplicationController
 
   def show
     @activity = Activity.find params[:id]
-
   end
 
   def new
@@ -24,15 +23,30 @@ class ActivitiesController < ApplicationController
 
   def edit
     @activity = Activity.find params[:id]
+
+  end
+
+  def update
+    @activity = Activity.find params[:id]
+
+    if @activity.update activity_params
+      redirect_to @activity, notice: 'Your activity was updated successfully.'
+    else
+      redirect_to @activity, alert: 'Whoops, something went wrong.'
+    end
   end
 
   def destroy
     @activity = Activity.find(params[:id])
-    if @activity.present?
-      @activity.destroy
-    end
+    if current_user.id === @activity.user_id
+      if @activity.present?
+        @activity.destroy
 
-    redirect_to root_path, notice: "Activity deleted"
+        redirect_to root_path, notice: "Activity deleted"
+      end
+    else
+      redirect_to root_path, alert: "This action is not possible!"
+    end
   end
 
   private
